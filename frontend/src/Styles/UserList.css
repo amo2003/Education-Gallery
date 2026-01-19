@@ -1,0 +1,63 @@
+.users-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  background: #f7f8fc;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.users-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.users-container h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg,#6a11cb,#2575fc);
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+.users-category {
+  margin-bottom: 2rem;
+}
+
+.users-category h3 {
+  color: #6a11cb;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.users-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.users-category li {
+  background: #fff;
+  margin-bottom: 0.5rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.users-category li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.users-category p {
+  color: #555;
+  font-size: 1rem;
+}

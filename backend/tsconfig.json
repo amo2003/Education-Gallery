@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    /* Language & Environment */
+    "target": "ES2019",
+    "lib": ["ES2019"],
+    "module": "commonjs",
+
+    /* Project Structure */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Node.js Support */
+    "types": ["node"],
+    "esModuleInterop": true,
+
+    /* Type Checking */
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Build */
+    "sourceMap": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
