@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
+import "../Styles/UploadPdf.css";
 
 const UploadPdf = () => {
   const [subject, setSubject] = useState("");
@@ -20,47 +21,57 @@ const UploadPdf = () => {
       formData.append("teacherName", teacherName);
       formData.append("pdf", pdf);
 
-      const res = await api.post("/pdfs/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await api.post("/pdfs/upload", formData);
 
-      console.log(res.data);
       alert("PDF uploaded successfully");
+      window.location.href = "/Profile"
+      setSubject("");
+      setTeacherName("");
+      setPdf(null);
     } catch (error: any) {
-      console.error(error);
       alert(error.response?.data?.message || "Upload failed");
     }
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <h2>Upload PDF</h2>
+    <div className="upload-page">
+      <form className="upload-card" onSubmit={submitHandler}>
+        <h2>Upload Study Notes</h2>
 
-      <input
-        placeholder="Subject"
-        value={subject}
-        onChange={(e) => setSubject(e.target.value)}
-        required
-      />
+        <div className="upload-group">
+          <input
+            type="text"
+            placeholder="Subject Name"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            required
+          />
+        </div>
 
-      <input
-        placeholder="Teacher Name"
-        value={teacherName}
-        onChange={(e) => setTeacherName(e.target.value)}
-        required
-      />
+        <div className="upload-group">
+          <input
+            type="text"
+            placeholder="Teacher Name"
+            value={teacherName}
+            onChange={(e) => setTeacherName(e.target.value)}
+            required
+          />
+        </div>
 
-      <input
-        type="file"
-        accept="application/pdf"
-        onChange={(e) => setPdf(e.target.files?.[0] || null)}
-        required
-      />
+        <div className="upload-group">
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={(e) => setPdf(e.target.files?.[0] || null)}
+            required
+          />
+        </div>
 
-      <button type="submit">Upload</button>
-    </form>
+        <button className="upload-btn" type="submit">
+          Upload PDF
+        </button>
+      </form>
+    </div>
   );
 };
 

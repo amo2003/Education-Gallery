@@ -53,20 +53,22 @@ const PdfList = () => {
 
   // Logged-in user view
   return (
-    <div className="pdf-list-container">
-      <h2>Study Notes</h2>
+    <div className="pdf-page-bg">
+      <div className="pdf-list-container">
+        <h2>Study Notes</h2>
 
-      {loading ? (
-        <p>Loading notes...</p>
-      ) : pdfs.length === 0 ? (
-        <p>No notes uploaded yet.</p>
-      ) : (
-        <div className="pdf-grid">
-          {pdfs.map((pdf) => (
-            <PdfCard key={pdf._id} pdf={pdf} refresh={fetchPdfs} />
-          ))}
-        </div>
-      )}
+        {loading ? (
+          <p>Loading notes...</p>
+        ) : pdfs.length === 0 ? (
+          <p>No notes uploaded yet.</p>
+        ) : (
+          <div className="pdf-grid">
+            {pdfs.map((pdf) => (
+              <PdfCard key={pdf._id} pdf={pdf} refresh={fetchPdfs} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

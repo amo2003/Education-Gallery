@@ -3,6 +3,7 @@ import {
   uploadPdf,
   getAllPdfs,
   downloadPdf,
+  getPdfById,
   updatePdf,
   deletePdf,
 } from "../controllers/pdfController";
@@ -16,6 +17,7 @@ const router = express.Router();
 // ================== PUBLIC TO LOGGED USERS ==================
 router.get("/", protect, getAllPdfs);
 router.get("/download/:id", protect, downloadPdf);
+router.get("/:id", protect, isTeacher, getPdfById);
 
 // ================== TEACHER ONLY ==================
 router.post(

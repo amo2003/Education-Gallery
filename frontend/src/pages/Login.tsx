@@ -1,47 +1,45 @@
-import { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import api from "../api/axios";
-import { useNavigate } from "react-router-dom";
-import "../Styles/Login.css"; // Import CSS
+import "../Styles/Login.css"
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleGoogleLogin = async (credentialResponse: any) => {
     try {
-      const res = await api.post("/auth/login", { email, password });
+      const res = await api.post("/auth/google", {
+        token: credentialResponse.credential,
+      });
+
+      // Save auth data
       localStorage.setItem("token", res.data.token);
-      navigate("/");
-    } catch (err: any) {
-      alert(err?.response?.data?.message ?? "Login failed");
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      // Redirect after login
+      window.location.href = "/";
+    } catch (error) {
+      console.error(error);
+      alert("Google login failed");
     }
   };
 
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={handleLogin}>
-        <h2 className="login-title">Login</h2>
+      <div className="login-form">
+        <h2 className="login-title">Welcome Back</h2>
+        <p className="login-subtitle">
+          Login to access study materials shared by teachers
+        </p>
 
-        <input
-          className="login-input"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          className="login-input"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="login-divider">
+          <span>Sign in with Google</span>
+        </div>
 
-        <button className="login-button" type="submit">
-          Login
-        </button>
-      </form>
+        <div className="google-login-wrapper">
+          <GoogleLogin
+            onSuccess={handleGoogleLogin}
+            onError={() => alert("Google Login Failed")}
+          />
+        </div>
+      </div>
     </div>
   );
 };

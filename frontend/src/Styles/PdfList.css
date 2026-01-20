@@ -1,8 +1,23 @@
-/* Container for the whole page */
+/* Full-page background wrapper for notes list */
+.pdf-page-bg {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(
+      rgba(15, 23, 42, 0.65),
+      rgba(15, 23, 42, 0.85)
+    ),
+    url("https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 3rem 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Container for the grid/content */
 .pdf-list-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -12,6 +27,7 @@
   font-size: 2rem;
   margin-bottom: 2rem;
   position: relative;
+  color: #ffffff;
 }
 
 .pdf-list-container h2::after {
@@ -35,7 +51,7 @@
 .pdf-guest-message {
   text-align: center;
   font-size: 1.2rem;
-  color: #555;
+  color: #e5e7eb;
   margin-top: 3rem;
 }
 
@@ -56,51 +72,6 @@
 .pdf-guest-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-/* PDF card container */
-.pdf-card {
-  background: #eaeaea;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  padding: 1.5rem;
-  transition: transform 0.3s, box-shadow 0.3s;
-  width: 30rem;
-  height: 18rem;
-}
-
-.pdf-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* PDF card title */
-.pdf-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-/* PDF card meta info */
-.pdf-card p {
-  color: #000000;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-/* Download button inside card */
-.pdf-card button {
-  padding: 0.5rem 1.5rem;
-  background: linear-gradient(90deg, #1b00c7, #1b00c7);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.pdf-card button:hover {
-  transform: scale(1.05);
 }
 
 /* Loading and empty state text */

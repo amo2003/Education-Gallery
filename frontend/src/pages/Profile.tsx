@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import PdfCard from "../components/PdfCard";
 import type { Pdf } from "./PdfList";
+import "../Styles/Profile.css";
 
 const Profile = () => {
   const [user, setUser] = useState<any>(null);
@@ -12,7 +13,6 @@ const Profile = () => {
     try {
       const res = await api.get("/auth/profile");
       setUser(res.data.user);
-      // only set notes uploaded by the teacher
       if (res.data.notes) {
         setNotes(res.data.notes);
       }
@@ -27,68 +27,74 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
-  const refreshNotes = () => {
-    fetchProfile();
-  };
-
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading profile...</div>;
   }
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Poppins, sans-serif" }}>
-      <h2>My Profile</h2>
-
-      {user && (
-        <div style={{ marginBottom: "30px" }}>
-          <p><strong>Name:</strong> {user.name}</p>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Role:</strong> {user.role}</p>
+    <div className="profile-page">
+      <div className="profile-card">
+        <div className="profile-header">
+          <h2>My Profile</h2>
+          <span
+            className={`profile-role ${
+              user?.role === "teacher" ? "role-teacher" : "role-student"
+            }`}
+          >
+            {user?.role}
+          </span>
         </div>
-      )}
 
-      {user?.role === "teacher" && (
-        <div>
-          <h3>My Shared Notes</h3>
-          <p style={{ color: "#666", marginBottom: "1rem", fontSize: "0.95rem" }}>
-            Manage your uploaded notes: Update or Delete them as needed.
-          </p>
-          {notes.length === 0 ? (
-            <p>You haven't uploaded any notes yet.</p>
-          ) : (
-            <div style={{ display: "grid", gap: "15px", marginTop: "10px" }}>
-              {notes.map((pdf) => (
-                <PdfCard 
-                  key={pdf._id} 
-                  pdf={pdf} 
-                  refresh={refreshNotes}
-                  userRole={user.role}
-                />
-              ))}
+        {user && (
+          <div className="profile-info">
+            <div className="info-box">
+              <span>Name</span>
+              <p>{user.name}</p>
             </div>
+            <div className="info-box">
+              <span>Email</span>
+              <p>{user.email}</p>
+            </div>
+          </div>
+        )}
+
+        <div className="notes-section">
+          {user?.role === "teacher" && (
+            <>
+              <h3>My Shared Notes</h3>
+              <p className="notes-hint">
+                Upload, update or delete your study materials
+              </p>
+
+              {notes.length === 0 ? (
+                <p className="empty-text">
+                  You haven't uploaded any notes yet.
+                </p>
+              ) : (
+                <div className="notes-grid">
+                  {notes.map((pdf) => (
+                    <PdfCard
+                      key={pdf._id}
+                      pdf={pdf}
+                      refresh={fetchProfile}
+                      userRole={user.role}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+
+          {user?.role === "student" && (
+            <>
+              <h3>Student Dashboard</h3>
+              <p className="notes-hint">
+                Browse study materials from the home page
+              </p>
+            </>
           )}
         </div>
-      )}
-
-      {user?.role === "student" && (
-        <div>
-          <h3>Available Notes</h3>
-          {notes.length === 0 ? (
-            <p>No notes available at the moment. Check the main page.</p>
-          ) : (
-            <div style={{ display: "grid", gap: "15px", marginTop: "10px" }}>
-              {notes.map((pdf) => (
-                <PdfCard 
-                  key={pdf._id} 
-                  pdf={pdf} 
-                  refresh={() => {}}
-                  userRole={user?.role}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+      </div>
     </div>
   );
 };

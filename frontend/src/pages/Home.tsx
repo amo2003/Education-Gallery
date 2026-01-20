@@ -4,6 +4,7 @@ import "../Styles/Home.css";
 import "../Styles/Modal.css";
 import { useNavigate, Link } from "react-router-dom";
 import { getToken, logout } from "../utils/auth";
+import { GoogleLogin } from "@react-oauth/google";
 
 // Login Modal Component
 const LoginModal = ({ onClose, onSuccess, onSwitchToRegister }: { onClose: () => void; onSuccess: () => void; onSwitchToRegister: () => void }) => {
@@ -32,12 +33,36 @@ const LoginModal = ({ onClose, onSuccess, onSwitchToRegister }: { onClose: () =>
     }
   };
 
+  const handleGoogleLogin = async (credentialResponse: any) => {
+    try {
+      const res = await api.post("/auth/google", {
+        token: credentialResponse.credential,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      onSuccess();
+    } catch (err: any) {
+      alert(err?.response?.data?.message ?? "Google login failed");
+    }
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>×</button>
         <form className="modal-form" onSubmit={handleLogin}>
           <h2 className="modal-title">Sign In</h2>
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => alert("Google login failed")}
+            />
+          </div>
+
+          <div style={{ textAlign: "center", color: "#999" }}>or</div>
+
           <input
             className="modal-input"
             placeholder="Email"
@@ -239,7 +264,7 @@ function Home() {
           <li><Link to="/userlist">Home</Link></li>
           <li><Link to="/list">Study Notes</Link></li>
           <li><Link to="/contact">Contact</Link></li>
-          {!isLoggedIn && <li><button className="navbar__link-button" onClick={() => setShowLoginModal(true)}>Sign In</button></li>}
+          {!isLoggedIn && <li><button className="navbar__link-button" onClick={() => setShowLoginModal(true)}>Sign In Your Profile</button></li>}
         </ul>
         <div className="navbar__buttons">
           {isLoggedIn ? (
@@ -278,7 +303,7 @@ function Home() {
       {/* HERO SECTION */}
       <section className="hero">
         <div className="hero__inner">
-          <h1 className="hero__title">Learn Smarter, Not Harder</h1>
+          <h1 className="hero__title">Smart Learning, Start Here..</h1>
           <p className="hero__subtitle">
             Access quality learning resources and connect with top teachers anytime.
           </p>

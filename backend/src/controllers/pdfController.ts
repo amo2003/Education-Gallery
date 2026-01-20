@@ -34,6 +34,24 @@ export const downloadPdf = async (req: Request, res: Response) => {
     res.download(pdf.filePath, pdf.fileName);
 };
 
+// Get single PDF details (for edit page)
+export const getPdfById = async (req: any, res: Response) => {
+  const pdf = await Pdf.findById(req.params.id);
+  if (!pdf) return res.status(404).json({ message: "PDF not found" });
+
+  // Ensure only the owner teacher can view details for editing
+  if (pdf.uploadedBy.toString() !== req.user.id) {
+    return res.status(403).json({ message: "You can only view your own PDFs" });
+  }
+
+  res.json({
+    id: pdf._id,
+    subject: pdf.subject,
+    teacherName: pdf.teacherName,
+    fileName: pdf.fileName,
+  });
+};
+
 export const updatePdf = async (req: any, res: Response) => {
   const pdf = await Pdf.findById(req.params.id);
   if (!pdf) return res.status(404).json({ message: "PDF not found" });
