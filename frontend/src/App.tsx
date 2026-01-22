@@ -8,6 +8,10 @@ import UploadPdf from "./pages/UploadPdf";
 import EditPdf from "./pages/EditPdf";
 import Profile from "./pages/Profile";
 import UsersList from "./pages/UserList";
+import EditProfile from "./pages/EditProfile";
+import Contact from "./pages/Contact";
+
+
 
 function App() {
   return (
@@ -22,6 +26,9 @@ function App() {
         <Route path="/edit-pdf/:id" element={<EditPdf />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/userlist" element={<UsersList />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/contact" element={<Contact />} />
+
 
 
       </Routes>

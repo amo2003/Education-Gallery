@@ -1,8 +1,12 @@
 import { GoogleLogin } from "@react-oauth/google";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
+import BackButton from "../components/BackButton";
 import "../Styles/Login.css"
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const handleGoogleLogin = async (credentialResponse: any) => {
     try {
       const res = await api.post("/auth/google", {
@@ -23,6 +27,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <BackButton to="/" />
       <div className="login-form">
         <h2 className="login-title">Welcome Back</h2>
         <p className="login-subtitle">
@@ -38,6 +43,20 @@ const Login = () => {
             onSuccess={handleGoogleLogin}
             onError={() => alert("Google Login Failed")}
           />
+        </div>
+
+        <div className="login-navigation">
+          <p className="login-navigation-text">
+            Don't have an account?{" "}
+            <Link to="/register" className="login-navigation-link">
+              Create Account
+            </Link>
+          </p>
+          <p className="login-navigation-text">
+            <Link to="/" className="login-navigation-link">
+              Go to Home
+            </Link>
+          </p>
         </div>
       </div>
     </div>

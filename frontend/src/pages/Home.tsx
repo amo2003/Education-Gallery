@@ -316,15 +316,15 @@ function Home() {
         <div className="values__grid">
           <div className="value-card">
             <h3>Quality Learning</h3>
-            <p>We provide high-quality resources curated by expert teachers.</p>
+            <p>We provide well-structured, reliable, and high-quality PDF notes created by educators to ensure students learn accurate concepts and build strong academic foundation.</p>
           </div>
           <div className="value-card">
             <h3>Flexibility</h3>
-            <p>Learn anytime, anywhere, and at your own pace.</p>
+            <p>Access learning materials anytime, anywhere. Our platform support self-paced learning, allowing students to study according to their own schedule without pressure ot time waste.</p>
           </div>
           <div className="value-card">
             <h3>Community</h3>
-            <p>Connect with teachers and fellow learners for better growth.</p>
+            <p>ZeroToHero connect students and teachers in a collaborative learning environment where knowledge is shared, support is encouraged, and everyone grows together.</p>
           </div>
         </div>
       </section>
@@ -334,8 +334,7 @@ function Home() {
         <div className="greeting__inner">
           <h2>Welcome to ZeroToHero</h2>
           <p>
-            Empowering learners and educators alike to achieve more through interactive
-            and accessible educational resources.
+            Welcome to ZeroToHero, a smart learning plafrom where <br/>student access quality notes and teachers share knowledge efficiently. Learn at your own pace, save time, and grow with confindence.
           </p>
         </div>
       </section>

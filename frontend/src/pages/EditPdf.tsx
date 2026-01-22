@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../api/axios";
+import BackButton from "../components/BackButton";
 import "../Styles/EditPdf.css";
 
 const EditPdf = () => {
@@ -47,6 +48,7 @@ const EditPdf = () => {
 
   return (
     <div className="edit-page">
+      <BackButton to="/profile" />
       <form className="edit-card" onSubmit={updateHandler}>
         <h2>Edit Study Note</h2>
 

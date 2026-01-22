@@ -4,6 +4,7 @@ import Pdf from "../models/pdf";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
+import { resolve } from "dns";
 
 /* ---------------- GOOGLE CLIENT ---------------- */
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -162,4 +163,56 @@ export const getAllUsers = async (req: any, res: Response) => {
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }
+};
+
+
+//update profile
+
+export const updateProfile = async (req: any, res: Response) => {
+  try {
+    const { name, role, email, password } = req.body;
+
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: "User not found"});
+
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (role) user.role = role;
+
+    if (password) {
+      user.password = await bcrypt.hash(password, 10);
+    }
+
+    await user.save();
+
+    res.json({
+      message: "profile updated successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        role: user.role,
+        email: user.email,
+
+      },
+    });
+  }catch (err) {
+    res.status(500).json({ message: "failed to update profiel "});
+  }
+};
+
+
+//delete profile
+
+export const deleteProfile = async (req: any, res: Response) => {
+try{
+  const userId = req.user.id;
+
+  await Pdf.deleteMany({ uploadedBy: userId });
+
+  await User.findByIdAndDelete(userId);
+
+  res.json({ message: "Account deleted successfully" });
+} catch (err) {
+  res.status(500).json({ message: "Failed to delete account" });
+}
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axios";
+import BackButton from "../components/BackButton";
 import "../Styles/UploadPdf.css";
 
 const UploadPdf = () => {
@@ -35,6 +36,7 @@ const UploadPdf = () => {
 
   return (
     <div className="upload-page">
+      <BackButton to="/profile" />
       <form className="upload-card" onSubmit={submitHandler}>
         <h2>Upload Study Notes</h2>
 

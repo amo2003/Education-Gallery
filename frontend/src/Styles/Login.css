@@ -113,6 +113,31 @@
   }
 }
 
+/* Navigation links */
+.login-navigation {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.login-navigation-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.login-navigation-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.login-navigation-link:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
 /* Mobile */
 @media (max-width: 480px) {
   .login-form {

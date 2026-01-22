@@ -107,6 +107,8 @@
   color: white;
 }
 
+
+
 /* Mobile */
 @media (max-width: 600px) {
   .profile-card {
@@ -116,4 +118,34 @@
   .profile-header h2 {
     font-size: 1.6rem;
   }
+}
+
+
+.pbtn-edit {
+  background: linear-gradient(135deg, #667eea, #667eea);
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.4rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(102, 126, 234, 0.35);
+}
+
+/* Hover */
+.pbtn-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(102, 126, 234, 0.45);
+}
+
+/* Click */
+.pbtn-edit:active {
+  transform: scale(0.97);
+}
+
+/* Optional: icon spacing */
+.pbtn-edit i {
+  margin-right: 6px;
 }
