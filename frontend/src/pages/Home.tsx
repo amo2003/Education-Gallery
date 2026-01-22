@@ -5,6 +5,7 @@ import "../Styles/Modal.css";
 import { useNavigate, Link } from "react-router-dom";
 import { getToken, logout } from "../utils/auth";
 import { GoogleLogin } from "@react-oauth/google";
+import logoImage from "../assets/vite.jpg";
 
 // Login Modal Component
 const LoginModal = ({ onClose, onSuccess, onSwitchToRegister }: { onClose: () => void; onSuccess: () => void; onSwitchToRegister: () => void }) => {
@@ -259,7 +260,10 @@ function Home() {
     <>
       {/* NAVBAR */}
       <nav className="navbar">
-        <Link to="/" className="navbar__logo">ZeroToHero</Link>
+        <Link to="/" className="navbar__logo">
+          <img src={logoImage} alt="ZeroToHero" className="navbar__logo-img" />
+          <span>ZeroToHero</span>
+        </Link>
         <ul className="navbar__links">
           <li><Link to="/userlist">Home</Link></li>
           <li><Link to="/list">Study Notes</Link></li>
